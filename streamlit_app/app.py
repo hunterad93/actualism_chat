@@ -27,9 +27,11 @@ def format_citation(annotation):
     file_id = annotation.file_citation.file_id
     filename = get_filename(file_id)
     if filename:
-        citation_info = f"[Citation from {filename} "
+        # Replace '-' with '/' and '.html' with '.htm' for URL conversion
+        file_url = "http://www.actualfreedom.com.au/" + filename.replace('---', '/').replace('.html', '.htm')
+        citation_info = f" ({file_url}) "
     else:
-        citation_info = "[Citation from an unknown file"
+        citation_info = "[Citation from an unknown file]"
     return citation_info
 
 def stream_generator(prompt, thread_id):
@@ -59,7 +61,7 @@ def stream_generator(prompt, thread_id):
                             for annotation in annotations:
                                 citation_info = format_citation(annotation)
                                 indexes = f"from index {annotation.start_index} to {annotation.end_index}]"
-                                text_value = f" **{citation_info + indexes}**"
+                                text_value = f"{citation_info}"
                         partial_response += text_value
                         words = partial_response.split(' ')
                         for word in words[:-1]:  # Yield all but the last incomplete word
