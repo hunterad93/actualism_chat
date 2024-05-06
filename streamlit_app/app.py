@@ -75,6 +75,8 @@ def stream_generator(prompt, thread_id):
 # Streamlit interface
 st.set_page_config(page_icon="🌺")
 st.title("🌺 Discuss Actualism With ChatGPT")
+st.subheader("Be wary that ChatGPT often makes mistakes and fills in the gaps with its own reasoning. Verify its responses using the provided citation links.")
+
 
 # Chat interface
 if "messages" not in st.session_state:
