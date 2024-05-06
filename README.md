@@ -9,3 +9,7 @@ The `db_cleanup.ipynb` notebook is a quick script that cleans up the database by
 
 The `streamlit_app/` directory contains the code for the web app that uses the assistant. It's a simple streamlit app that takes the user's input and sends it to the assistant. The assistant then returns the response and the app displays it. It includes support for 'streaming' responses which improves UI a lot.
 
+# Chat with the bot here:
+
+https://actualismchat.streamlit.app/
+
