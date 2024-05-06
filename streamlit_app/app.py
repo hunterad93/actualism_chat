@@ -27,7 +27,7 @@ def format_citation(annotation):
     file_id = annotation.file_citation.file_id
     filename = get_filename(file_id)
     if filename:
-        # Replace '-' with '/' and '.html' with '.htm' for URL conversion
+        # Replace '---' with '/' and '.html' with '.htm' for URL conversion
         file_url = "http://www.actualfreedom.com.au/" + filename.replace('---', '/').replace('.html', '.htm')
         citation_info = f" ({file_url}) "
     else:
