@@ -13,3 +13,5 @@
 *.toml
 *.csv
 *.json
+*.md
+*.txt
