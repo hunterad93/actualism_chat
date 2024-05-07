@@ -31,7 +31,7 @@ def format_citation(annotation):
         file_url = filename.replace('---', '/').replace('.txt', '')
         if not file_url.startswith('www.'):
             file_url = 'www.' + file_url
-        citation_info = f"({file_url})"
+        citation_info = f" ({file_url}) "
     else:
         citation_info = "[Citation from an unknown file]"
     return citation_info
