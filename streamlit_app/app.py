@@ -29,7 +29,9 @@ def format_citation(annotation):
     if filename:
         # Replace '---' with '/' and '.html' with '.htm' for URL conversion
         file_url = filename.replace('---', '/').replace('.txt', '')
-        citation_info = f" ({file_url}) "
+        if not file_url.startswith('www.'):
+            file_url = 'www.' + file_url
+        citation_info = f"({file_url})"
     else:
         citation_info = "[Citation from an unknown file]"
     return citation_info
