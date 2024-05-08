@@ -11,6 +11,8 @@ The `db_clear_last_24.ipynb` allows you to interact with the files in the openai
 
 The `streamlit_app/` directory contains the code for the web app that uses the assistant. It's a simple streamlit app that takes the user's input and sends it to the assistant. The assistant then returns the response and the app displays it. It includes support for 'streaming' responses which improves UI a lot. Additionally it converts the openai api response 'citations' to URLs that can be clicked on. Note that to store API keys for use in the streamlit app, you interact with the streamlit sharing GUI to add 'secrets' i.e. environment variables.
 
+The heavy lifting for this project is really done by the recently updated openai API. Recent updates that implement best retrieval augmented generation (RAG) practices out of the box are discussed in this [article](https://platform.openai.com/docs/assistants/whats-new).
+
 # Chat with the bot here:
 
 https://actualismchat.streamlit.app/
