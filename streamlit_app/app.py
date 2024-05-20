@@ -119,4 +119,4 @@ def delete_thread_on_session_end():
             print(f"Error deleting thread {thread_id}: {e}")
 
 # Register the callback to delete the thread on session end
-st.on_session_end(delete_thread_on_session_end)
+# st.on_session_end(delete_thread_on_session_end)
