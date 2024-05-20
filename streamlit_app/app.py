@@ -50,11 +50,12 @@ def stream_generator(prompt, thread_id):
             thread_id=thread_id,
             assistant_id=assistant_id,
             stream=True,
-            max_prompt_tokens=20000
+            max_prompt_tokens=20000          
         )
         partial_response = ""
         for event in stream:
             if event.data.object == "thread.message.delta":
+                print(event)
                 for content in event.data.delta.content:
                     if content.type == 'text':
                         text_value = content.text.value
@@ -77,7 +78,7 @@ def stream_generator(prompt, thread_id):
 # Streamlit interface
 st.set_page_config(page_icon="🌺")
 st.title("🌺 Discuss Actualism With ChatGPT")
-st.subheader("Be wary that ChatGPT often makes mistakes and fills in the gaps with its own reasoning. Verify its responses using the provided citation links.")
+st.subheader("Be wary that ChatGPT often makes mistakes and fills in the gaps with its own reasoning. Verify its responses using the provided citation links. The currently deployed version is using chat gpt 3.5 to manage costs.")
 
 
 # Chat interface
@@ -107,3 +108,15 @@ if prompt:
             response_container.markdown("🌺 " + full_response)
 
     st.session_state.messages.append({"role": "assistant", "content": full_response})
+
+def delete_thread_on_session_end():
+    if "thread_id" in st.session_state:
+        thread_id = st.session_state.thread_id
+        try:
+            client.beta.threads.delete(thread_id)
+            print(f"Thread {thread_id} deleted successfully.")
+        except Exception as e:
+            print(f"Error deleting thread {thread_id}: {e}")
+
+# Register the callback to delete the thread on session end
+st.on_session_end(delete_thread_on_session_end)
