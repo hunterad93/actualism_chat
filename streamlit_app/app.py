@@ -75,6 +75,29 @@ def stream_generator(prompt, thread_id):
         if partial_response:
             yield partial_response  # Yield any remaining text
 
+def delete_thread_on_session_end():
+    if "thread_id" in st.session_state:
+        thread_id = st.session_state.thread_id
+        try:
+            client.beta.threads.delete(thread_id)
+            print(f"Thread {thread_id} deleted successfully.")
+        except Exception as e:
+            print(f"Error deleting thread {thread_id}: {e}")
+
+# Initialize session state for last activity time
+if "last_activity" not in st.session_state:
+    st.session_state.last_activity = time.time()
+
+# Update last activity time
+st.session_state.last_activity = time.time()
+
+# Periodically check for session inactivity
+def check_inactivity():
+    if time.time() - st.session_state.last_activity > 300:  # 5 minutes of inactivity
+        delete_thread_on_session_end()
+        st.stop()
+
+
 # Streamlit interface
 st.set_page_config(page_icon="🌺")
 st.title("🌺 Discuss Actualism With ChatGPT")
@@ -109,14 +132,4 @@ if prompt:
 
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-def delete_thread_on_session_end():
-    if "thread_id" in st.session_state:
-        thread_id = st.session_state.thread_id
-        try:
-            client.beta.threads.delete(thread_id)
-            print(f"Thread {thread_id} deleted successfully.")
-        except Exception as e:
-            print(f"Error deleting thread {thread_id}: {e}")
-
-# Register the callback to delete the thread on session end
-# st.on_session_end(delete_thread_on_session_end)
+st.experimental_rerun()  # Rerun the script to check for inactivity
