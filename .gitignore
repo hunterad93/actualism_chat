@@ -15,3 +15,5 @@
 *.json
 *.md
 *.txt
+*.jsonl
+!requirements.txt
