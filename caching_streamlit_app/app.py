@@ -229,7 +229,7 @@ def dislike_action():
 # Streamlit interface
 st.set_page_config(page_icon="🌺")
 st.title("🌺 Discuss Actualism With ChatGPT")
-st.subheader("Be wary that ChatGPT often makes mistakes and fills in the gaps with its own reasoning. Verify its responses using the provided citation links. The currently deployed version is using chat gpt 3.5 to manage costs.")
+st.subheader("Be wary that ChatGPT often makes mistakes and fills in the gaps with its own reasoning. Verify its responses using the provided citation links. Cached response are used when the same question has been asked before.")
 
 # Chat interface
 if "messages" not in st.session_state:
