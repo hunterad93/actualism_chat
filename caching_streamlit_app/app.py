@@ -283,7 +283,7 @@ if prompt:
                 response_container.markdown("🌺 " + full_response)
         response_text = full_response
 
-        if len(st.session_state.messages) <= 2:  # Assuming the first user prompt and the first assistant response
+        if len(st.session_state.messages) <= 2 and assistant_id == gpt4o_assistant_id:  # Assuming the first user prompt and the first assistant response
             upload_to_pinecone(prompt, response_text)
         full_response_text = response_text
 
